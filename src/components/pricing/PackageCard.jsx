@@ -87,6 +87,16 @@ const PackageCard = ({ plan, showToggle = true, staticPeriod }) => {
                 </div>
 
                 <div className="mb-8 pb-8 border-b border-white/5 relative z-10">
+                    {plan.originalPrice && billingCycle === 'monthly' && (
+                        <div className="flex items-center gap-2 mb-1">
+                            <span className="text-slate-500 line-through text-lg md:text-xl font-medium decoration-slate-600">
+                                ₹{plan.originalPrice}
+                            </span>
+                            <span className="inline-block px-2 py-0.5 rounded-md bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[10px] font-bold uppercase">
+                                Special Offer
+                            </span>
+                        </div>
+                    )}
                     {billingCycle === 'yearly' && originalYearlyPrice > 0 && (
                         <div className="flex items-center gap-2 mb-1">
                             <span className="text-slate-500 line-through text-lg md:text-xl font-medium decoration-slate-600">
@@ -121,7 +131,23 @@ const PackageCard = ({ plan, showToggle = true, staticPeriod }) => {
                     )}
 
                     {plan.subPrice && (
-                        <p className="text-lg font-bold text-violet-400 mt-1">{plan.subPrice}</p>
+                        <div className="mt-1 flex flex-col items-start">
+                            {plan.originalSubPrice && billingCycle === 'monthly' && (
+                                <div className="flex items-center gap-2 mb-0.5">
+                                    <span className="text-slate-500 line-through text-xs font-medium decoration-slate-600">
+                                        E-commerce starts @{plan.originalSubPrice}
+                                    </span>
+                                </div>
+                            )}
+                            <div className="flex items-center gap-2">
+                                <p className="text-lg font-bold text-violet-400">{plan.subPrice}</p>
+                                {plan.originalSubPrice && billingCycle === 'monthly' && (
+                                    <span className="inline-block px-1.5 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[9px] uppercase font-bold tracking-wider">
+                                        Offer
+                                    </span>
+                                )}
+                            </div>
+                        </div>
                     )}
                 </div>
 

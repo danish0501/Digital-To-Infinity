@@ -1,17 +1,49 @@
 import { useState, useRef } from 'react';
-import { motion, useMotionTemplate, useMotionValue, useSpring, LayoutGroup, AnimatePresence } from 'framer-motion';
-import { Check, Star, ArrowRight, Rocket } from 'lucide-react';
-// import StarterPackCard from "../components/StarterPackCard";
-import { pricingData } from "../data/mock";
+import { motion, useMotionTemplate, useMotionValue, useSpring } from 'framer-motion';
+import { Check, Star, ArrowRight, Rocket, Globe, Video, Target, Users } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { packageCategories } from '../data/packageData';
-import WebsitePackages from './pricing/WebsitePackages';
-import CreativePackages from './pricing/CreativePackages';
-import AdsPackages from './pricing/AdsPackages';
-import SocialPackages from './pricing/SocialPackages';
+
+const secondaryServices = [
+    {
+        id: 'web',
+        title: 'Web Development',
+        path: 'website-development',
+        desc: 'High-performance, conversion-optimized websites and web apps.',
+        icon: Globe,
+        color: 'from-blue-400 to-cyan-400',
+        shadow: 'group-hover:shadow-[0_0_30px_rgba(56,189,248,0.3)]'
+    },
+    {
+        id: 'creatives',
+        title: 'Creatives & Reels',
+        path: 'creatives & reels',
+        desc: 'Viral-worthy short-form content and premium graphic design.',
+        icon: Video,
+        color: 'from-fuchsia-400 to-pink-400',
+        shadow: 'group-hover:shadow-[0_0_30px_rgba(232,121,249,0.3)]'
+    },
+    {
+        id: 'ads',
+        title: 'Ads Management',
+        path: 'ads-management',
+        desc: 'Data-driven Meta & Google campaigns for maximum ROAS.',
+        icon: Target,
+        color: 'from-violet-400 to-indigo-400',
+        shadow: 'group-hover:shadow-[0_0_30px_rgba(167,139,250,0.3)]'
+    },
+    {
+        id: 'social',
+        title: 'Social Media',
+        path: 'social-management',
+        desc: 'End-to-end community management and brand building.',
+        icon: Users,
+        color: 'from-emerald-400 to-teal-400',
+        shadow: 'group-hover:shadow-[0_0_30px_rgba(52,211,153,0.3)]'
+    }
+];
 
 // --- COMPONENT: 3D HOLOGRAPHIC CARD ---
-const PlanCard = ({ plan, billingCycle }) => {
+export const PlanCard = ({ plan, billingCycle }) => {
     const ref = useRef(null);
     const navigate = useNavigate();
 
@@ -115,18 +147,7 @@ const PlanCard = ({ plan, billingCycle }) => {
 // --- MAIN PAGE COMPONENT ---
 const Plan = () => {
 
-    const [showPlans, setShowPlans] = useState(false);
-    const [activeTab, setActiveTab] = useState('web');
-
-    const renderSecondaryPackages = () => {
-        switch (activeTab) {
-            case 'web': return <WebsitePackages />;
-            case 'creatives': return <CreativePackages />;
-            case 'ads': return <AdsPackages />;
-            case 'social': return <SocialPackages />;
-            default: return <WebsitePackages />;
-        }
-    };
+    const navigate = useNavigate();
 
     return (
         <div className="min-h-screen bg-slate-950 font-sans selection:bg-violet-500/30 overflow-x-hidden">
@@ -150,135 +171,129 @@ const Plan = () => {
                 {/* STARTER PACK SECTION */}
                 {/* <StarterPackCard /> */}
 
-                <AnimatePresence mode="wait">
-                    {!showPlans ? (
+                {/* EXPLORE ALL PLANS BANNER */}
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.5 }}
+                    className="w-full relative rounded-[2rem] p-[1px] mb-32 z-10 max-w-5xl mx-auto"
+                >
+                    <div className="absolute inset-0 bg-gradient-to-r from-violet-600 via-fuchsia-600 to-indigo-600 rounded-[2rem] opacity-40 blur-2xl animate-pulse" />
+                    <div className="relative h-full bg-slate-900/90 backdrop-blur-2xl rounded-[2rem] p-10 md:p-20 border border-white/10 text-center flex flex-col items-center overflow-hidden shadow-2xl">
+                        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 mix-blend-overlay pointer-events-none" />
+
                         <motion.div
-                            key="ad-banner"
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0, y: -20 }}
-                            transition={{ duration: 0.5 }}
-                            className="w-full relative rounded-[2rem] p-[1px] mb-32 z-10 max-w-5xl mx-auto"
+                            initial={{ y: 20, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            transition={{ delay: 0.2 }}
+                            className="w-20 h-20 mb-8 rounded-3xl bg-gradient-to-br from-violet-600 to-fuchsia-600 p-[1px] shadow-[0_0_30px_rgba(139,92,246,0.3)]"
                         >
-                            <div className="absolute inset-0 bg-gradient-to-r from-violet-600 via-fuchsia-600 to-indigo-600 rounded-[2rem] opacity-40 blur-2xl animate-pulse" />
-                            <div className="relative h-full bg-slate-900/90 backdrop-blur-2xl rounded-[2rem] p-10 md:p-20 border border-white/10 text-center flex flex-col items-center overflow-hidden shadow-2xl">
-                                <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 mix-blend-overlay pointer-events-none" />
-
-                                <motion.div
-                                    initial={{ y: 20, opacity: 0 }}
-                                    animate={{ y: 0, opacity: 1 }}
-                                    transition={{ delay: 0.2 }}
-                                    className="w-20 h-20 mb-8 rounded-3xl bg-gradient-to-br from-violet-600 to-fuchsia-600 p-[1px] shadow-[0_0_30px_rgba(139,92,246,0.3)]"
-                                >
-                                    <div className="w-full h-full bg-slate-950 rounded-[23px] flex items-center justify-center">
-                                        <Rocket className="w-10 h-10 text-white" />
-                                    </div>
-                                </motion.div>
-
-                                <motion.h2
-                                    initial={{ y: 20, opacity: 0 }}
-                                    animate={{ y: 0, opacity: 1 }}
-                                    transition={{ delay: 0.3 }}
-                                    className="text-4xl md:text-6xl font-extrabold text-white mb-6 tracking-tight relative z-10"
-                                >
-                                    Unlock <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-fuchsia-400 to-indigo-400 animate-gradient">Total Digital Dominance</span>
-                                </motion.h2>
-
-                                <motion.p
-                                    initial={{ y: 20, opacity: 0 }}
-                                    animate={{ y: 0, opacity: 1 }}
-                                    transition={{ delay: 0.4 }}
-                                    className="text-lg md:text-xl text-slate-300 max-w-3xl mb-12 relative z-10 leading-relaxed max-[426px]:text-base"
-                                >
-                                    Take your business from its current state to absolute market leadership. Our comprehensive plans cover everything from custom website development to advanced omnichannel advertising, AI automation, and beyond.
-                                </motion.p>
-
-                                <motion.button
-                                    initial={{ y: 20, opacity: 0 }}
-                                    animate={{ y: 0, opacity: 1 }}
-                                    transition={{ delay: 0.5 }}
-                                    onClick={() => setShowPlans(true)}
-                                    className="relative px-10 py-5 rounded-full font-bold text-lg max-[426px]:text-sm uppercase tracking-wide bg-white text-slate-950 hover:bg-violet-50 transition-all duration-300 shadow-[0_0_40px_rgba(139,92,246,0.4)] hover:shadow-[0_0_70px_rgba(139,92,246,0.6)] hover:-translate-y-1 overflow-hidden group/btn z-10 flex items-center gap-3 cursor-pointer"
-                                >
-                                    <span className="relative z-10 flex items-center gap-2">Explore All Plans <Rocket className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" /></span>
-                                    <div className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-violet-500/20 to-transparent skew-x-12" />
-                                </motion.button>
+                            <div className="w-full h-full bg-slate-950 rounded-[23px] flex items-center justify-center">
+                                <Rocket className="w-10 h-10 text-white" />
                             </div>
                         </motion.div>
-                    ) : (
-                        <motion.div
-                            key="pricing-grid"
-                            initial={{ opacity: 0, y: 50 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, staggerChildren: 0.2 }}
-                            className="mb-32"
-                        >
-                            <div className="flex justify-center mb-12">
-                                <button
-                                    onClick={() => setShowPlans(false)}
-                                    className="text-slate-400 hover:text-white text-sm font-semibold flex items-center gap-2 transition-colors cursor-pointer"
-                                >
-                                    <ArrowRight className="w-4 h-4 rotate-180" /> Back to Overview
-                                </button>
-                            </div>
 
-                            <div className="grid grid-cols-1 min-[850px]:grid-cols-3 gap-8 max-[426px]:gap-12 items-start">
-                                <LayoutGroup>
-                                    {pricingData.map((plan, index) => (
-                                        <motion.div key={plan.id} initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.1, duration: 0.5 }} className={plan.recommended ? 'min-[850px]:-mt-8 z-10' : ''}>
-                                            <PlanCard plan={plan} billingCycle="monthly" />
-                                        </motion.div>
-                                    ))}
-                                </LayoutGroup>
-                            </div>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
+                        <motion.h2
+                            initial={{ y: 20, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            transition={{ delay: 0.3 }}
+                            className="text-4xl md:text-6xl font-extrabold text-white mb-6 tracking-tight relative z-10"
+                        >
+                            Unlock <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-fuchsia-400 to-indigo-400 animate-gradient">Total Digital Dominance</span>
+                        </motion.h2>
+
+                        <motion.p
+                            initial={{ y: 20, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            transition={{ delay: 0.4 }}
+                            className="text-lg md:text-xl text-slate-300 max-w-3xl mb-12 relative z-10 leading-relaxed max-[426px]:text-base"
+                        >
+                            Take your business from its current state to absolute market leadership. Our comprehensive plans cover everything from custom website development to advanced omnichannel advertising, AI automation, and beyond.
+                        </motion.p>
+
+                        <motion.button
+                            initial={{ y: 20, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            transition={{ delay: 0.5 }}
+                            onClick={() => navigate('/plans/all-plans')}
+                            className="relative px-10 py-5 rounded-full font-bold text-lg max-[426px]:text-sm uppercase tracking-wide bg-white text-slate-950 hover:bg-violet-50 transition-all duration-300 shadow-[0_0_40px_rgba(139,92,246,0.4)] hover:shadow-[0_0_70px_rgba(139,92,246,0.6)] hover:-translate-y-1 overflow-hidden group/btn z-10 flex items-center gap-3 cursor-pointer"
+                        >
+                            <span className="relative z-10 flex items-center gap-2">Explore All Plans <Rocket className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" /></span>
+                            <div className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-violet-500/20 to-transparent skew-x-12" />
+                        </motion.button>
+                    </div>
+                </motion.div>
 
                 {/* SECONDARY PACKAGES SECTION */}
                 <div className="mt-40">
-                    <div className="text-center max-w-3xl mx-auto mb-16">
+                    <div className="text-center max-w-3xl mx-auto mb-16 px-4">
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold mb-6 uppercase tracking-widest shadow-[0_0_20px_rgba(59,130,246,0.15)]"
+                        >
+                            <Target className="w-4 h-4" /> Targeted Solutions
+                        </motion.div>
+
                         <motion.h2
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            className="text-4xl md:text-5xl font-bold text-white mb-6"
+                            transition={{ delay: 0.1 }}
+                            className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 tracking-tight"
                         >
-                            Specialized <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">Service Packages</span>
+                            Specialized <br className="md:hidden" />
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-emerald-400 animate-gradient bg-[length:200%_auto]">
+                                Growth Modules
+                            </span>
                         </motion.h2>
-                        <p className="text-slate-400">Choose from our specialized service modules tailored to your specific business needs.</p>
-                    </div>
 
-                    {/* TABS */}
-                    <div className="flex flex-wrap justify-center gap-4 mb-16 px-4">
-                        {packageCategories.map((cat) => (
-                            <button
-                                key={cat.id}
-                                onClick={() => setActiveTab(cat.id)}
-                                className={`relative px-6 py-3 rounded-2xl text-sm font-bold transition-all duration-300 cursor-pointer overflow-hidden ${activeTab === cat.id ? 'text-white border-white/20' : 'text-slate-400 hover:text-white border-transparent bg-white/5 border border-white/5'}`}
-                            >
-                                {activeTab === cat.id && (
-                                    <motion.div
-                                        layoutId="active-tab-bg"
-                                        className="absolute inset-0 bg-gradient-to-r from-violet-600 to-indigo-600 shadow-[0_0_20px_rgba(124,58,237,0.3)]"
-                                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                                    />
-                                )}
-                                <span className="relative z-10">{cat.label}</span>
-                            </button>
-                        ))}
-                    </div>
-
-                    {/* SECONDARY GRID */}
-                    <div className="relative">
-                        <motion.div
-                            key={activeTab}
-                            initial={{ opacity: 0, x: 20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.4 }}
+                        <motion.p
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.2 }}
+                            className="text-lg text-slate-400 leading-relaxed max-w-2xl mx-auto"
                         >
-                            {renderSecondaryPackages()}
-                        </motion.div>
+                            Need something specific? Deploy our high-performance individual service modules designed to execute perfectly as standalone solutions or plug right into your existing operations.
+                        </motion.p>
+                    </div>
+
+                    {/* SECONDARY PACKAGES GRID */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-4 mb-20 max-w-7xl mx-auto">
+                        {secondaryServices.map((service, index) => (
+                            <motion.div
+                                key={service.id}
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: index * 0.1, duration: 0.5 }}
+                                onClick={() => navigate(`/plans/${service.path}`)}
+                                className="group relative flex flex-col p-8 rounded-[2rem] bg-slate-900/50 border border-white/5 hover:border-white/20 hover:bg-slate-900/80 transition-all duration-500 cursor-pointer overflow-hidden backdrop-blur-md"
+                            >
+                                <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
+
+                                <div className="relative z-10 flex-grow">
+                                    <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${service.color} p-[1px] mb-8 group-hover:scale-110 transition-transform duration-500 ease-out ${service.shadow}`}>
+                                        <div className="w-full h-full bg-slate-950 rounded-[15px] flex items-center justify-center">
+                                            <service.icon className="w-6 h-6 text-white" />
+                                        </div>
+                                    </div>
+                                    <h3 className="text-xl font-bold text-white mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-slate-300 transition-all duration-300">
+                                        {service.title}
+                                    </h3>
+                                    <p className="text-slate-400 text-sm leading-relaxed mb-8">
+                                        {service.desc}
+                                    </p>
+                                </div>
+
+                                <div className="relative z-10 flex items-center text-sm font-bold text-white mt-auto pt-6 border-t border-white/5 group-hover:border-white/10 transition-colors">
+                                    <span className="group-hover:mr-2 transition-all duration-300">View Packages</span>
+                                    <ArrowRight className="w-4 h-4 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300 text-white" />
+                                </div>
+                            </motion.div>
+                        ))}
                     </div>
                 </div>
 

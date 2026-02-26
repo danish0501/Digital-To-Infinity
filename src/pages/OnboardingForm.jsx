@@ -221,16 +221,32 @@ const PackageItem = ({ pkg, isSelected, onSelect, index }) => (
                     {pkg.name}
                 </span>
                 {pkg.subPrice && (
-                    <span className={`text-[10px] md:text-xs font-medium transition-colors ${isSelected ? 'text-violet-300/80' : 'text-slate-500'}`}>
-                        {pkg.subPrice}
-                    </span>
+                    <div className="flex flex-col mt-0.5">
+                        {pkg.originalSubPrice && (
+                            <span className="text-slate-500 line-through text-[9px] md:text-[10px] font-medium decoration-slate-600 leading-none mb-0.5">
+                                E-commerce starts @{pkg.originalSubPrice}
+                            </span>
+                        )}
+                        <span className={`text-[10px] md:text-xs font-medium transition-colors ${isSelected ? 'text-violet-300/80' : 'text-slate-500'} leading-none flex items-center gap-1`}>
+                            {pkg.subPrice}
+                            {pkg.originalSubPrice && <span className="inline-block px-1 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[8px] uppercase font-bold tracking-wider leading-none">Offer</span>}
+                        </span>
+                    </div>
                 )}
             </div>
         </div>
 
-        <div className="z-10 pl-2">
-            <span className={`font-mono font-bold text-sm md:text-lg ${isSelected ? 'text-violet-300 shadow-violet-500/50 drop-shadow-md' : 'text-slate-500 group-hover:text-violet-400'}`}>
-                {pkg.price}
+        <div className="z-10 pl-2 text-right">
+            {pkg.originalPrice && (
+                <div className="text-slate-500 line-through text-xs md:text-sm font-medium decoration-slate-600 mb-0.5">
+                    {pkg.originalPrice}
+                </div>
+            )}
+            <span className={`font-mono font-bold text-sm md:text-lg flex flex-col items-end ${isSelected ? 'text-violet-300 shadow-violet-500/50 drop-shadow-md' : 'text-slate-500 group-hover:text-violet-400'}`}>
+                <div className="flex items-center gap-2">
+                    {pkg.originalPrice && <span className="inline-block px-1.5 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[8px] md:text-[10px] uppercase font-bold tracking-wider">Offer</span>}
+                    <span>{pkg.price}</span>
+                </div>
             </span>
         </div>
     </motion.button>
@@ -471,7 +487,7 @@ const OnboardingForm = () => {
             id: 'website',
             label: 'Website Development Packages',
             items: [
-                { id: 'web-business', name: 'Business Website', price: '₹19,999/one time', subPrice: 'E-commerce starts @₹30,000' },
+                { id: 'web-business', name: 'Business Website', price: '₹14,999/one time', originalPrice: '₹19,999', subPrice: 'E-commerce starts @₹22,000', originalSubPrice: '₹30,000' },
                 { id: 'web-growth', name: 'Growth Website', price: '₹34,999/one time', subPrice: 'E-commerce starts @₹60,000' },
                 { id: 'web-brand', name: 'Brand Experience Website', price: '₹60K - 1L+/one time', subPrice: '3D Experience starts @₹80,000' },
             ]

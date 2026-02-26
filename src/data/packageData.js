@@ -1,4 +1,4 @@
-import { Globe, Palette, Users, Zap, Star, ShieldCheck, Rocket, Layout, Video, Target, TrendingUp, Search, MessageCircle } from 'lucide-react';
+import { Globe, Palette, Users, Zap, Star, ShieldCheck, Rocket, Layout, Video, Target, TrendingUp, MessageCircle } from 'lucide-react';
 
 export const packageCategories = [
     { id: 'web', label: 'Website Development Packages' },
@@ -11,9 +11,11 @@ export const websitePackages = [
     {
         id: 'web-business',
         name: 'Business Website',
-        monthlyPrice: '19,999',
+        monthlyPrice: '14,999',
+        originalPrice: '19,999',
         yearlyPrice: '2,15,990',
-        subPrice: 'E-commerce starts @₹30,000',
+        subPrice: 'E-commerce starts @₹22,000',
+        originalSubPrice: '₹30,000',
         desc: 'Best for local businesses establishing an online presence.',
         icon: Globe,
         features: [

@@ -11,6 +11,7 @@ import Plans from "./pages/Plans";
 import GrowthEngine from "./pages/GrowthEngine";
 import PerformanceAcc from "./pages/PerformanceAcc";
 import MarketLeader from "./pages/MarketLeader";
+import AllPlansPage from "./pages/AllPlansPage";
 import Portfolio from "./pages/Portfolio";
 import ScrollToTop from "./components/ScrollToTop";
 import NewYear from "./pages/NewYear";
@@ -23,6 +24,7 @@ import MarketLeaderLP from './pages/MarketLeaderLP';
 import FreeMarketingPlanPage from './pages/FreeMarketingPlanPage';
 import MarketingFormPage from './pages/MarketingFormPage';
 import Audit from './pages/audit';
+import SecondaryPlanPage from './pages/SecondaryPlanPage';
 
 
 ReactGA.initialize("G-H5N5VHRL0Q");
@@ -87,10 +89,17 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/services" element={<Services />} />
-          <Route path="/plans" element={<Plans />} />
-          <Route path="/plans/growth-engine-plans" element={<GrowthEngine />} />
-          <Route path="/plans/performance-accelerator-plans" element={<PerformanceAcc />} />
-          <Route path="/plans/market-leader-plans" element={<MarketLeader />} />
+          <Route path="/plans">
+            <Route index element={<Plans />} />
+            <Route path="all" element={<AllPlansPage />} />
+            <Route path="growth-engine-plan" element={<GrowthEngine />} />
+            <Route path="performance-accelerator-plan" element={<PerformanceAcc />} />
+            <Route path="market-leader-plan" element={<MarketLeader />} />
+            <Route path="website-development" element={<SecondaryPlanPage category="web" />} />
+            <Route path="creatives-reels" element={<SecondaryPlanPage category="creatives" />} />
+            <Route path="ads-management" element={<SecondaryPlanPage category="ads" />} />
+            <Route path="social-management" element={<SecondaryPlanPage category="social" />} />
+          </Route>
           <Route path="/contact" element={<Contact />} />
           <Route path="/new-year-offers" element={<NewYear />} />
           <Route path="/starter-pack-offers" element={<StarterPackOffers />} />
