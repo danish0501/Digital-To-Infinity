@@ -3,6 +3,7 @@ import {
     User, Mail, Phone, Building, Tag, ChevronDown, Pen, CheckCircle2
 } from 'lucide-react';
 import ReactGA from "react-ga4";
+import ReactPixel from "react-facebook-pixel";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useRef } from 'react';
 import Navbar from "../components/Navbar";

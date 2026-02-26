@@ -3,6 +3,7 @@ import { X, Send, User, Mail, Phone, MessageSquare, CheckCircle, Building2, Tag,
 import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import ReactGA from "react-ga4";
+import ReactPixel from "react-facebook-pixel";
 
 const ContactPopup = ({ isOpen, onClose, backendUrl }) => {
     const defaultBackendUrl = 'https://digitaltoinfinity.com/send_popup.php';

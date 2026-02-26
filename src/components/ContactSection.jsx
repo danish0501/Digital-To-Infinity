@@ -4,6 +4,7 @@ import { Phone, Mail, MapPin, Send, MessageCircle, User, Instagram, Facebook, Li
 import { AnimatePresence } from 'framer-motion';
 import { companyInfo } from '../data/mock';
 import ReactGA from "react-ga4";
+import ReactPixel from "react-facebook-pixel";
 
 // --- OPTIMIZED BACKGROUND (CSS ANIMATIONS) ---
 const CosmicBackground = () => {

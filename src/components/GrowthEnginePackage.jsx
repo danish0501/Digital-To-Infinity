@@ -11,6 +11,7 @@ import InteriorImg from "../assets/growth-engine-package/interior-work.png";
 import ConsultationImg from "../assets/growth-engine-package/interior-work-explanation.png";
 import OfficeImg from "../assets/growth-engine-package/office.png";
 import ContactPopup from "./ContactPopup";
+import ReactPixel from "react-facebook-pixel";
 
 const GrowthEnginePackage = () => {
     const [faqOpen, setFaqOpen] = useState(null);

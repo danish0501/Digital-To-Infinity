@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Check, ChevronDown, Loader2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import ReactPixel from "react-facebook-pixel";
 import outcomesImg from '../assets/performance-accelerator-package/outcomes-section.png';
 import marketImg from '../assets/performance-accelerator-package/navi-mumbai-market.png';
 import changeImg from '../assets/performance-accelerator-package/change-we-make.png';

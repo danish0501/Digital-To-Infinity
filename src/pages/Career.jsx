@@ -15,6 +15,7 @@ import {
     Timer,
     Trash2
 } from 'lucide-react';
+import ReactPixel from "react-facebook-pixel";
 
 const Jobs = [
     {

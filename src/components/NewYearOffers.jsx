@@ -7,6 +7,7 @@ import {
 import ContactPopup from "../components/ContactPopup";
 import { webProjects } from "../data/mock";
 import ReactGA from "react-ga4";
+import ReactPixel from "react-facebook-pixel";
 
 /* --- UTILITY: Scroll Reveal Component --- */
 const Reveal = ({ children, className = "" }) => {
